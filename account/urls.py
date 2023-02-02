@@ -20,6 +20,6 @@ urlpatterns = [
     # path('token/obtain/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('logout', LogoutAndBlacklistRefreshToken.as_view(), name='blacklist_token'),
-    path('change_password/<int:number>/', ChangePasswordView.as_view(),
+    path('change_password/<char:email>/', ChangePasswordView.as_view(),
          name='auth_change_password'),
 ]
