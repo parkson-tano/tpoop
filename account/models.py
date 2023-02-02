@@ -12,7 +12,7 @@ class User(AbstractUser):
     student = models.BooleanField(default =False)
     advertiser = models.BooleanField(default =False)
     date_created = models.DateTimeField(auto_now_add=True)
-    city = models.ForeignKey(City, on_delete = models.DO_NOTHING)
+    city = models.CharField(max_length=256, null=True, blank=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'username']
 
