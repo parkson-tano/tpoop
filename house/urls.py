@@ -10,5 +10,5 @@ urlpatterns = [
         'delete': 'destroy',
         'put' : 'update'
     })),
-    path('search/<city>/<house_type>', search),
+    path('search/<city>/<house_type>/', search),
 ]
