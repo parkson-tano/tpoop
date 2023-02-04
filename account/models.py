@@ -1,3 +1,5 @@
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 # from django.utils.translation import ugettext_lazy as _
@@ -20,3 +22,24 @@ class User(AbstractUser):
 
     def __str__(self):
         return str(self.email)
+
+
+class PhoneNumber(models.Model):
+    user = models.ForeignKey(User, on_delete= models.CASCADE)
+    phone = models.BigIntegerField(default=0)
+    
+    def __str__(self):
+        return str(self.phone)
+    
+
+@receiver(post_save, sender=User)
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        PhoneNumber.objects.create(user=instance, phone = instance.phone_number)
+
+
+# @receiver(post_save, sender=User)
+# def save_profile(sender, instance, **kwargs):
+#     instance.phonenumber.save()
+
+

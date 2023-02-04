@@ -5,7 +5,7 @@ from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import get_user_model
-
+from .models import *
 User = get_user_model()
 
 
@@ -63,7 +63,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             city=validated_data['city'],   
             student=validated_data['student'], 
             advertiser=validated_data['advertiser'], 
-            phone_number = validate_data['phone_number']
+            phone_number = validated_data['phone_number']
         )
 
         user.set_password(validated_data['password'])
@@ -79,3 +79,9 @@ class ChangePasswordSerializer(serializers.Serializer):
     """
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
+
+
+class PhoneSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PhoneNumber
+        fields = '__all__'

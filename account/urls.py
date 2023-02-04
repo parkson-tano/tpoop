@@ -22,4 +22,9 @@ urlpatterns = [
     path('logout', LogoutAndBlacklistRefreshToken.as_view(), name='blacklist_token'),
     path('change_password/<str:email>/', ChangePasswordView.as_view(),
          name='auth_change_password'),
+    path('phonenumber', PhoneApiView.as_view({'get' : 'list', 'post': 'create'
+    })),
+    path('phonenumber/<int:pk>', PhoneApiView.as_view({'get': 'retrieve', 'put': 'update',
+                                                       'patch': 'partial_update',
+                                                       'delete': 'destroy'}))
 ]
