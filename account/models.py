@@ -9,6 +9,8 @@ class User(AbstractUser):
         max_length=50, blank=True, null=True, unique=False, default="")
     email = models.CharField(
         _('email'), unique=True, max_length=15)
+    phone_number = models.CharField(
+        _('phone_number'), unique=True, max_length=15)
     student = models.BooleanField(default =False)
     advertiser = models.BooleanField(default =False)
     date_created = models.DateTimeField(auto_now_add=True)

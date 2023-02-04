@@ -23,14 +23,14 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class GetUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = "__all__"
+        fields =  ('id', 'password', 'email', 'phone_number', 'first_name', 'city', 'student', 'advertiser', 'date_created', )
 
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'password', 'email', 'first_name', 'city', 'student', 'advertiser', 'date_created', )
+        fields = ('id', 'password', 'email', 'phone_number', 'first_name', 'city', 'student', 'advertiser', 'date_created', )
 
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
@@ -43,7 +43,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('password', 'email', 'first_name', 'city', 'student', 'advertiser', 'date_created')
+        fields = ('password', 'email','phone_number','first_name', 'city', 'student', 'advertiser', 'date_created')
         extra_kwargs = {
             'last_name': {'required': False},
         }
@@ -63,6 +63,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             city=validated_data['city'],   
             student=validated_data['student'], 
             advertiser=validated_data['advertiser'], 
+            phone_number = validate_data['phone_number']
         )
 
         user.set_password(validated_data['password'])
