@@ -2,13 +2,20 @@ from django.db import models
 from location.models import City
 from account.models import User
 # Create your models here.
+
+TYPEs = (('chambre_modern', 'chambre_modern'), ('chambre_simple', 'chambre_simple'), 
+         ('studio_modern', 'studio_modern'),
+        ('mini_studio', 'mini_studio'), ('appartement','appartement'),
+          ('appartement_meubler', 'appartement_meubler'),
+        )
+
 class House(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     price = models.IntegerField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     city = models.CharField(max_length=256, null=True, blank=True)
     quater = models.CharField(max_length=256, null=True, blank=True)
-    house_type = models.CharField(max_length=256, null=True)
+    house_type = models.CharField(max_length=256, choices=TYPEs,  null=True)
     room_nb = models.IntegerField(default=0)
     toilet_nb = models.IntegerField(default=0)
     kitchen_nb = models.IntegerField(default=0)

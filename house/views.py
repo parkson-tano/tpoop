@@ -19,8 +19,8 @@ class GetHouseViewAPI(viewsets.ModelViewSet):
 
 
 @api_view(['GET', 'PATCH'])
-def search(request, city):
-    house = House.objects.filter(city=city)
+def search(request, city, house_type, price):
+    house = House.objects.filter(Q(city=city) and Q(house_type = house_type) and Q(price < price))
     search_serializer = GetHouseSerializer(
         house, many=True, context={'request': request})
     return Response(search_serializer.data)
